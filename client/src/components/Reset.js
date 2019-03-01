@@ -40,7 +40,7 @@ class Reset extends Component {
             <div className="form-group">
 
             <label htmlFor="password">Password</label>
-            <input type="password" className="form-control" name="epasswordmail" placeholder="Enter password" value={this.state.password} onChange={this.onChange}/>
+            <input type="password" className="form-control" name="password" placeholder="Enter password" value={this.state.password} onChange={this.onChange}/>
             
             </div>
 
