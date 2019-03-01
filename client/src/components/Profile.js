@@ -44,10 +44,7 @@ return(
     <td>Email</td>
     <td>{this.state.email}</td>
     </tr>
-    <tr>
-    <td>Password</td>
-    <td>{this.state.password}</td>
-    </tr>
+   
     </tbody>
     
     </table>
