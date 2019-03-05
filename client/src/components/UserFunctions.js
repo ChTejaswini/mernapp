@@ -6,7 +6,8 @@ export const register =newUser =>{
         first_name:newUser.first_name,
         last_name:newUser.last_name,
         email:newUser.email,
-        password:newUser.password
+        password:newUser.password,
+        confirmpassword:newUser.confirmpassword
 
     })
     .then(res =>{
@@ -32,15 +33,15 @@ export const login =user =>{
 } 
 export const reset =user =>{
     return axios
-    .post('users/reset ',{
+    .put('users/reset ',{
         
-       
+      // first_name:user.first_name,
         password:user.password,
         confirmpassword:user.confirmpassword
 
     })
     .then(res =>{
-    localStorage.setItem('usertoken',res.data)
+        console.log(res.data);
     return res.data
     })
     .catch(err =>
@@ -55,11 +56,12 @@ export const forgot =user =>{
         email:user.email,
     })
     .then(res =>{
-    localStorage.setItem('usertoken',res.data)
+        console.log(res.data);
     return res.data
     })
     .catch(err =>
         {
             console.log(err)
         })
-} 
+}
+ 
