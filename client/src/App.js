@@ -21,7 +21,7 @@ class App extends Component {
 <Route exact path="/register" component={Register}/>
 <Route exact path="/login" component={Login}/>
 <Route exact path="/profile" component={Profile}/>
-<Route exact path="/reset" component={Reset}/>
+<Route exact path="/reset/:token" component={Reset}/>
 <Route exact path="/forgot" component={Forgot}/>
 </div>
 </div>
