@@ -1,23 +1,27 @@
 import React,{Component} from 'react'
 import {reset} from './UserFunctions'
+// import {axios} from 'axios'
 
 class Reset extends Component {
     constructor(){
         super()
         this.state={
+            first_name: '',
             password:'',
             confirmpassword:''
         }
         this.onChange= this.onChange.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
     }
+   
+
     onChange(e){
         this.setState({[e.target.name]:e.target.value})
     }
     onSubmit(e){
         e.preventDefault()
         const user ={
-         
+            //first_name: this.state.first_name,
             password:this.state.password,
             confirmpassword:this.state.confirmpassword
         }
@@ -46,13 +50,13 @@ class Reset extends Component {
 
             <div className="form-group">
 
-<label htmlFor="password"> Confirm Password</label>
-<input type="password" className="form-control" name="confirmpassword" placeholder="Re-Enter Password" value={this.state.confirmpassword} onChange={this.onChange}/>
+                <label htmlFor="password"> Confirm Password</label>
+                <input type="password" className="form-control" name="confirmpassword" placeholder="Re-Enter Password" value={this.state.confirmpassword} onChange={this.onChange}/>
 
-</div>
-<button type="submit" className="btn btn-lg btn-primary btn-block">
-Reset
-</button>
+          </div>
+          <button type="submit" className="btn btn-lg btn-primary btn-block">
+          Reset
+          </button>
             </form>
             
             </div>
