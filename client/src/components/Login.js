@@ -51,8 +51,6 @@ class Login extends Component {
                 </div>
                 <div className="row">
                 <div className="col-md-6">
-                <a href="/reset"   className="nav-link">Reset Password</a></div>
-                <div className="col-md-6">
                 <a href="/forgot"  className="nav-link">Forgot Password</a></div>
                 </div>
                 <button type="submit" className="btn btn-lg btn-primary btn-block">
