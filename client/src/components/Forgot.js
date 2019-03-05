@@ -9,12 +9,12 @@ class Forgot extends Component {
            
         }
         this.onChange= this.onChange.bind(this)
-        this.onSubmit = this.onSubmit.bind(this)
+        this.onSubmit = this.sendEmail.bind(this)
     }
     onChange(e){
         this.setState({[e.target.name]:e.target.value})
     }
-    onSubmit(e){
+    sendEmail = (e) => {
         e.preventDefault()
         const user ={
             email:this.state.email,
@@ -22,7 +22,8 @@ class Forgot extends Component {
         }
         forgot(user).then(res =>{
             if(res){
-                this.props.history.push('/reset')
+                // <h1>A link has been sent to your email to reset the password Set your password and login here</h1>
+                this.props.history.push('/login')
 
             }
         })
@@ -33,7 +34,7 @@ class Forgot extends Component {
             <div className="row">
             <div className="col-md-6 mt-5 mx-auto">
             
-            <form noValidate onSubmit={this.onSubmit}>
+            <form noValidate onSubmit={this.sendEmail}>
             
                  <h1 className="h3 mb-3 font-weight-normal">Forgot Password</h1>
                 <div className="form-group">
