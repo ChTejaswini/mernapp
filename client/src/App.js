@@ -6,7 +6,7 @@ import Landing from './components/Landing'
 import Login from './components/Login'
 import Register from './components/Register'
 import Profile from './components/Profile'
-import Reset from './components/Reset'
+import ResetPassword from './components/Reset'
 import Forgot from './components/Forgot'
 
 class App extends Component {
@@ -21,7 +21,7 @@ class App extends Component {
 <Route exact path="/register" component={Register}/>
 <Route exact path="/login" component={Login}/>
 <Route exact path="/profile" component={Profile}/>
-<Route exact path="/reset/:token" component={Reset}/>
+<Route exact path="/resetpassword/:token" component={ResetPassword}/>
 <Route exact path="/forgot" component={Forgot}/>
 </div>
 </div>
