@@ -32,6 +32,16 @@ class Reset extends Component {
             }
         })
     }
+      // componentDidMount(){
+    //     const user ={
+    //         password:this.state.password
+    //     }
+    //     reset(user).then(res =>{
+    //         if(res){
+    //             this.props.history.push('/login')
+    //         }
+    //     })
+    // }
     render(){
         return (
             <div className="container">
