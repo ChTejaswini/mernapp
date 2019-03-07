@@ -1,8 +1,8 @@
 import React,{Component} from 'react'
-import {reset} from './UserFunctions'
+import {resetpassword} from './UserFunctions'
 // import {axios} from 'axios'
 
-class Reset extends Component {
+class ResetPassword extends Component {
     constructor(){
         super()
         this.state={
@@ -25,14 +25,14 @@ class Reset extends Component {
             password:this.state.password,
             confirmpassword:this.state.confirmpassword
         }
-        reset(user).then(res =>{
+        resetpassword(user).then(res =>{
             if(res){
                 this.props.history.push('/login')
 
             }
         })
     }
-      // componentDidMount(){
+    // componentDidMount(){
     //     const user ={
     //         password:this.state.password
     //     }
@@ -42,6 +42,8 @@ class Reset extends Component {
     //         }
     //     })
     // }
+    
+
     render(){
         return (
             <div className="container">
@@ -76,4 +78,4 @@ class Reset extends Component {
         )
     }
 }
-export default Reset
+export default ResetPassword
