@@ -27,7 +27,7 @@ Clone the project
 
 ```bash
 
-https://github.com/ChTejaswini/mernapp
+https://github.com/ChTejaswini/mernapp.git
 
 ```
 
