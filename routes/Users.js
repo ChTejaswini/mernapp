@@ -5,7 +5,6 @@ const jwt = require("jsonwebtoken")
 const bcrypt = require('bcrypt')
  const nodemailer = require('nodemailer');
  const Sequelize = require('sequelize')
- const BCRYPT_SALT_ROUNDS = 12;
 const User = require("../models/User")
 global.crypto = require('crypto')
 users.use(cors())
@@ -19,6 +18,7 @@ users.post('/register', (req, res) => {
         last_name: req.body.last_name,
         email: req.body.email,
         password: req.body.password,
+        confirmpassword:req.body.confirmpassword,
         created: today
     }
     User.findOne({
@@ -94,6 +94,7 @@ users.post('/forgot', (req, res) => {
           res.status(403).send('email not in db');
         } else {
           const token = crypto.randomBytes(20).toString('hex');
+        
           user.update({
             resetPasswordToken: token,
             resetPasswordExpires: Date.now() + 360000,
@@ -114,11 +115,12 @@ users.post('/forgot', (req, res) => {
             text:
               'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n'
               + 'Please click on the following link, or paste this into your browser to complete the process within one hour of receiving it:\n\n'
-              + `http://localhost:3000/reset/${token}\n\n`
+              + `http://localhost:3000/resetpassword/${token}\n\n`
               + 'If you did not request this, please ignore this email and your password will remain unchanged.\n',
           };
-  
+         
           console.log('sending mail');
+          console.log('first called');
   
           transporter.sendMail(mailOptions, (err, response) => {
             if (err) {
@@ -131,27 +133,62 @@ users.post('/forgot', (req, res) => {
         }
       });
     })
-   
-        users.get('/reset', (req, res) => {
-          User.findOne({
-            where: {
-              resetPasswordToken: req.query.resetPasswordToken,
-              resetPasswordExpires: {
-                [Op.gt]: Date.now(),
-              },
-            },
-          }).then((user) => {
-            if (user == null) {
-              console.error('password reset link is invalid or has expired');
-              res.status(403).send('password reset link is invalid or has expired');
-            } else {
-              res.status(200).send({
-                first_name: user.first_name,
-                message: 'password reset link a-ok',
-              });
-            }
+
+    users.get('/reset',(req,res,next)=>{
+User.findOne({
+  where:{
+    resetPasswordToken:req.query.resetPasswordToken,
+    resetPasswordExpires:{
+      OP:Date.now(),
+    },
+  },
+}).then(user =>{
+  if(user == null){
+    console.log('password reset link is invalid or expired')
+    res.json('password reset link is invalid or expired')
+  }else{
+    res.status(200).send({
+      first_name:user.first_name,
+      message:'password link reset a ok'
+    });
+  }
+    });
+  });
+  const BCRYPT_SALT_ROUNDS = 12;
+
+  users.put('/resetpassword', (req, res) => {
+    User.findOne({
+      where: {
+        first_name: req.body.first_name,
+      },
+    }).then((user) => {
+      if (user != null) {
+        console.log('user exists in db');
+        bcrypt
+          .hash(req.body.password, BCRYPT_SALT_ROUNDS)
+          .then((hashedPassword) => {
+            user.update({
+              password: hashedPassword,
+              resetPasswordToken: null,
+              resetPasswordExpires: null,
+            });
+          })
+          .then(() => {
+            console.log('password updated');
+            res.status(200).send({ message: 'password updated' });
           });
-        });
+      } else {
+        console.error('no user exists in db to update');
+        res.status(401).json('no user exists in db to update');
+      }
+    });
+  });
+
+
+   
+     
+  
+
     
   
 
