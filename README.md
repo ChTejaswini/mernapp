@@ -65,7 +65,7 @@ Test on browser of your choice
 
 ```bash
 
-Visit http://localhost:3000/register (port number in app.js)
+Visit http://localhost:3000/register 
 
 
 ```
