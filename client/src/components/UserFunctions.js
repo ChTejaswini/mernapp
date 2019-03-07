@@ -1,5 +1,5 @@
 import axios from 'axios'
-
+// import PropTypes from 'prop-types';
 export const register =newUser =>{
     return axios
     .post('users/register ',{
@@ -31,15 +31,17 @@ export const login =user =>{
             console.log(err)
         })
 } 
-export const reset =user =>{
+export const resetpassword =user =>{
+   
     return axios
-    .put('users/reset ',{
-        
-      // first_name:user.first_name,
+    .put('users/resetpassword',{
+
+       //first_name:user.first_name,
         password:user.password,
         confirmpassword:user.confirmpassword
-
+    
     })
+    
     .then(res =>{
         console.log(res.data);
     return res.data
@@ -49,6 +51,31 @@ export const reset =user =>{
             console.log(err)
         })
 } 
+
+// export const reset =user =>{
+   
+//     return axios
+//     .get('/reset',{params:{
+//         resertPasswordToken:this.props.match.token,
+//     },
+        
+
+//     })
+    
+//     .then(res =>{
+//         console.log(res.data);
+//         this.setState({
+//             first_name:res.data.first_name
+//         })
+//     return res.data
+//     })
+//     .catch(err =>
+//         {
+//             console.log(err)
+//         })
+// } 
+
+
 export const forgot =user =>{
     return axios
     .post('users/forgot ',{
@@ -57,6 +84,7 @@ export const forgot =user =>{
     })
     .then(res =>{
         console.log(res.data);
+        console.log('users function forgot is called second',res.data);
     return res.data
     })
     .catch(err =>
@@ -64,4 +92,12 @@ export const forgot =user =>{
             console.log(err)
         })
 }
- 
+
+// resetpassword.propTypes = {
+//     // eslint-disable-next-line react/require-default-props
+//     match: PropTypes.shape({
+//       params: PropTypes.shape({
+//         token: PropTypes.string.isRequired,
+//       }),
+//     }),
+//   };
